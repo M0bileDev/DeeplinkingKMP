@@ -22,9 +22,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <!-- https://deep-link.com/item/ -->
                 <data android:scheme="https" />
                 <data android:host="deep-link.com" />
-                <data android:path="/item/" />
+                <data android:pathPrefix="/item/" />
             </intent-filter>
         </activity>
     </application>
