@@ -15,7 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+
+private const val DEEP_LINK_URI_PATTERN = "https://deep-link.com/item/"
+private const val DETAIL_ARG = "{id}"
 
 @Composable
 fun NavRoot() {
@@ -39,7 +43,14 @@ fun NavRoot() {
                 }
             }
         }
-        composable<Route.Details> { backStackEntry ->
+        composable<Route.Details>(
+            deepLinks = listOf(
+                navDeepLink {
+//                  navigation will substitute {id} with argument from the route (must be identical!)
+                    this.uriPattern = "$DEEP_LINK_URI_PATTERN/$DETAIL_ARG"
+                }
+            )
+        ) { backStackEntry ->
             val route = backStackEntry.toRoute<Route.Details>()
             Box(
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
