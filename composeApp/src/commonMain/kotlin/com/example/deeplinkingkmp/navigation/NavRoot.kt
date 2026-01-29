@@ -47,8 +47,8 @@ fun NavRoot() {
             deepLinks = listOf(
                 navDeepLink {
 //                  navigation will substitute {id} with argument from the route (must be identical!)
-                    this.uriPattern = "$DEEP_LINK_URI_PATTERN/$DETAIL_ARG"
-                }
+                    this.uriPattern = "$DEEP_LINK_URI_PATTERN$DETAIL_ARG"
+                },
             )
         ) { backStackEntry ->
             val route = backStackEntry.toRoute<Route.Details>()
