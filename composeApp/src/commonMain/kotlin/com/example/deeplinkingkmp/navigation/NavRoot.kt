@@ -35,9 +35,11 @@ fun NavRoot() {
             ) {
                 items(100) { item ->
                     Text(
-                        modifier = Modifier.fillMaxWidth().padding(16.dp).clickable {
-                            navController.navigate(Route.Details(item))
-                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                navController.navigate(Route.Details(item))
+                            }.padding(16.dp),
                         text = "Item: $item"
                     )
                 }
