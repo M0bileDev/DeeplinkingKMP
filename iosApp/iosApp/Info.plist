@@ -9,7 +9,7 @@
 			<string>deep-link.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>https</string>
+				<string>myapp</string>
 			</array>
 		</dict>
 	</array>
