@@ -24,6 +24,8 @@ private const val DETAIL_ARG = "{id}"
 @Composable
 fun NavRoot() {
     val navController = rememberNavController()
+    DeepLinkListener(navController)
+
     NavHost(
         navController = navController,
         startDestination = Route.List
