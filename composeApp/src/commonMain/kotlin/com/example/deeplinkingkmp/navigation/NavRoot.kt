@@ -19,11 +19,15 @@ import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 
 private const val DEEP_LINK_URI_PATTERN = "https://deep-link.com/item/"
+private const val DEEP_LINK_URI_PATTERN_MYAPP = "myapp://deep-link.com/item/"
 private const val DETAIL_ARG = "{id}"
 
+//open terminal and type adb shell am start -W -a android.intent.action.VIEW -d "myapp://deep-link.com/item/16" com.example.deeplinkingkmp
 @Composable
 fun NavRoot() {
     val navController = rememberNavController()
+    DeepLinkListener(navController)
+
     NavHost(
         navController = navController,
         startDestination = Route.List
@@ -35,9 +39,11 @@ fun NavRoot() {
             ) {
                 items(100) { item ->
                     Text(
-                        modifier = Modifier.fillMaxWidth().padding(16.dp).clickable {
-                            navController.navigate(Route.Details(item))
-                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                navController.navigate(Route.Details(item))
+                            }.padding(16.dp),
                         text = "Item: $item"
                     )
                 }
@@ -47,8 +53,11 @@ fun NavRoot() {
             deepLinks = listOf(
                 navDeepLink {
 //                  navigation will substitute {id} with argument from the route (must be identical!)
-                    this.uriPattern = "$DEEP_LINK_URI_PATTERN/$DETAIL_ARG"
-                }
+                    this.uriPattern = "$DEEP_LINK_URI_PATTERN$DETAIL_ARG"
+                },
+                navDeepLink {
+                    this.uriPattern = "$DEEP_LINK_URI_PATTERN_MYAPP$DETAIL_ARG"
+                },
             )
         ) { backStackEntry ->
             val route = backStackEntry.toRoute<Route.Details>()
